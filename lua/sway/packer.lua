@@ -37,23 +37,12 @@ use {
     run = ':TSUpdate'
 }
 use { "ellisonleao/gruvbox.nvim" }
-use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-        'nvim-tree/nvim-web-devicons', -- optional
-    },
-    config = function()
-        require("nvim-tree").setup {}
-    end
-}
+
 use {
     'f-person/git-blame.nvim'
 }
 use {
     'gelguy/wilder.nvim',
-    config = function()
-        -- config goes here
-    end,
 }
 use {
   'nvim-lualine/lualine.nvim',

@@ -7,7 +7,8 @@ end)
 lsp.ensure_installed({
     'tsserver',
     'eslint',
-    'rust_analyzer'
+    'rust_analyzer',
+    'pylsp' 
 })
 
 lsp.setup()
@@ -20,12 +21,29 @@ cmp.setup({
         {name = 'nvim_lsp'},
         {name = 'luasnip'},
     },
-    mapping = {
-        ['<Tab>'] = cmp_action.tab_complete(),
-        ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
-        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-        ['<C-b>'] = cmp_action.luasnip_jump_backward()
-    }
+    mapping = cmp.mapping.preset.insert({
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
+          -- they way you will only jump inside the snippet region
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+    })
+    -- mapping = {
+    --    ['<Tab>'] = cmp_action.tab_complete(),
+    --    ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+    --    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    --    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+    -- }
 
 
 })
