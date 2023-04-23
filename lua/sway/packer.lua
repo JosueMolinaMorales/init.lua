@@ -6,10 +6,9 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-
+    use("simrat39/rust-tools.nvim")
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim', 
         requires = { {'nvim-lua/plenary.nvim'} }
     }  
     use {
@@ -45,7 +44,21 @@ use {
     'gelguy/wilder.nvim',
 }
 use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 }
+
+--    use {
+    --      'jiangmiao/auto-pairs'
+    --}
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional
+        },
+        config = function()
+            require("nvim-tree").setup {}
+        end
+    }
+
 end)

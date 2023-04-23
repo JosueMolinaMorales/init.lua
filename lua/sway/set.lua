@@ -28,7 +28,6 @@ vim.opt.colorcolumn = "80"
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest,full"
 
-vim.g.netrw_winsize = 30
-vim.g.netrw_usetab = 1
-vim.g.netrw_preview = 1
-
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
