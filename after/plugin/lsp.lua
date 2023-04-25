@@ -47,7 +47,8 @@ lsp.ensure_installed({
     'tsserver',
     'eslint',
     'rust_analyzer',
-    'pylsp' 
+    'pylsp',
+    'jdtls'
 })
 
 -- Options for Rust analyzer
@@ -126,4 +127,3 @@ local opts = {
 }
 
 require("rust-tools").setup(opts)
-

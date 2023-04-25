@@ -48,9 +48,9 @@ use {
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 }
 
---    use {
-    --      'jiangmiao/auto-pairs'
-    --}
+    use {
+          'jiangmiao/auto-pairs'
+    }
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -61,4 +61,8 @@ use {
         end
     }
 
+    use {
+      'lewis6991/gitsigns.nvim',
+      -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+    }
 end)
