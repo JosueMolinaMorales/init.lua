@@ -35,7 +35,10 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+    
     use { "ellisonleao/gruvbox.nvim" }
+    
+    use { "lukas-reineke/indent-blankline.nvim", requires = 'ellisonleao/gruvbox.nvim' }
 
     use {
         'f-person/git-blame.nvim'
@@ -65,5 +68,11 @@ return require('packer').startup(function(use)
       'lewis6991/gitsigns.nvim',
       -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
     }
-    use "tenxsoydev/tabs-vs-spaces.nvim"
+    -- using packer.nvim
+    use {
+      'nmac427/guess-indent.nvim',
+      config = function() require('guess-indent').setup {} end,
+    }
+    use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+    use 'nvim-tree/nvim-web-devicons'
 end)
