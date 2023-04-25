@@ -18,35 +18,35 @@ return require('packer').startup(function(use)
             -- LSP Support
             {'neovim/nvim-lspconfig'},             -- Required
             {                                      -- Optional
-            'williamboman/mason.nvim',
-            run = function()
-                pcall(vim.cmd, 'MasonUpdate')
-            end,
-        },
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
+                'williamboman/mason.nvim',
+                run = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
+            {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},     -- Required
-        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        {'L3MON4D3/LuaSnip'},     -- Required
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},     -- Required
+            {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'L3MON4D3/LuaSnip'},     -- Required
+        }
+    } 
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
     }
-} 
-use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-}
-use { "ellisonleao/gruvbox.nvim" }
+    use { "ellisonleao/gruvbox.nvim" }
 
-use {
-    'f-person/git-blame.nvim'
-}
-use {
-    'gelguy/wilder.nvim',
-}
-use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-}
+    use {
+        'f-person/git-blame.nvim'
+    }
+    use {
+        'gelguy/wilder.nvim',
+    }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
 
     use {
           'jiangmiao/auto-pairs'
@@ -65,4 +65,5 @@ use {
       'lewis6991/gitsigns.nvim',
       -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
     }
+    use "tenxsoydev/tabs-vs-spaces.nvim"
 end)

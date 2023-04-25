@@ -166,6 +166,11 @@ _G.packer_plugins = {
     path = "/Users/josuemorales/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
+  ["tabs-vs-spaces.nvim"] = {
+    loaded = true,
+    path = "/Users/josuemorales/.local/share/nvim/site/pack/packer/start/tabs-vs-spaces.nvim",
+    url = "https://github.com/tenxsoydev/tabs-vs-spaces.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/josuemorales/.local/share/nvim/site/pack/packer/start/telescope.nvim",
