@@ -75,4 +75,5 @@ return require('packer').startup(function(use)
     }
     use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
     use 'nvim-tree/nvim-web-devicons'
+    use 'github/copilot.vim'
 end)

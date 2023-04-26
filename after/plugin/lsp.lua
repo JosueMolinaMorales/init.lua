@@ -58,6 +58,11 @@ local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 -- luasnip setup
 local luasnip = require 'luasnip'
+luasnip.setup {
+  history = true,
+  region_check_events = "InsertEnter",
+  delete_check_events = "TextChanged,InsertLeave"
+}
 cmp.setup({
 
     sources = {
@@ -73,7 +78,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["N"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
@@ -82,7 +87,7 @@ cmp.setup({
             fallback()
           end
         end, { "i", "s" }),
-
+        ['P'] = cmp_action.select_prev_or_fallback(),
     })
     -- mapping = {
     --    ['<Tab>'] = cmp_action.tab_complete(),
