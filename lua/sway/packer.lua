@@ -76,4 +76,12 @@ return require('packer').startup(function(use)
     use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
     use 'nvim-tree/nvim-web-devicons'
     use 'github/copilot.vim'
+    use {'akinsho/git-conflict.nvim', 
+        tag = "*",
+        config = function()
+          require('git-conflict').setup()
+        end
+    }
+   
+    use 'echasnovski/mini.nvim'
 end)
