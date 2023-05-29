@@ -3,44 +3,44 @@ local lsp = require('lsp-zero').preset({})
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
   local keymap_opts = { buffer = bufnr }
--- Code navigation and shortcuts
-vim.keymap.set("n", "<c-]>", vim.lsp.buf.definition, keymap_opts)
-vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_opts)
-vim.keymap.set("n", "gD", vim.lsp.buf.implementation, keymap_opts)
-vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, keymap_opts)
-vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, keymap_opts)
-vim.keymap.set("n", "gr", vim.lsp.buf.references, keymap_opts)
-vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, keymap_opts)
-vim.keymap.set("n", "gW", vim.lsp.buf.workspace_symbol, keymap_opts)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_opts)
-vim.keymap.set("n", "ga", vim.lsp.buf.code_action, keymap_opts)
--- Set updatetime for CursorHold
--- 300ms of no cursor movement to trigger CursorHold
-vim.opt.updatetime = 100
+  -- Code navigation and shortcuts
+  vim.keymap.set("n", "<c-]>", vim.lsp.buf.definition, keymap_opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.implementation, keymap_opts)
+  vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, keymap_opts)
+  vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, keymap_opts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, keymap_opts)
+  vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, keymap_opts)
+  vim.keymap.set("n", "gW", vim.lsp.buf.workspace_symbol, keymap_opts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_opts)
+  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, keymap_opts)
+  -- Set updatetime for CursorHold
+  -- 300ms of no cursor movement to trigger CursorHold
+  vim.opt.updatetime = 100
 
--- Show diagnostic popup on cursor hover
-local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
-vim.api.nvim_create_autocmd("CursorHold", {
-  callback = function()
-   vim.diagnostic.open_float(nil, { focusable = false })
-  end,
-  group = diag_float_grp,
-})
+  -- Show diagnostic popup on cursor hover
+  local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
+  vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+     vim.diagnostic.open_float(nil, { focusable = false })
+    end,
+    group = diag_float_grp,
+  })
 
--- Goto previous/next diagnostic warning/error
-vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
-vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
--- have a fixed column for the diagnostics to appear in
--- this removes the jitter when warnings/errors flow in
-vim.wo.signcolumn = "yes"
-local format_sync_grp = vim.api.nvim_create_augroup("Format", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
+  -- Goto previous/next diagnostic warning/error
+  vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
+  vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
+  -- have a fixed column for the diagnostics to appear in
+  -- this removes the jitter when warnings/errors flow in
+  vim.wo.signcolumn = "yes"
+  local format_sync_grp = vim.api.nvim_create_augroup("Format", {})
+  vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.rs",
   callback = function()
     vim.lsp.buf.format({ timeout_ms = 200 })
   end,
   group = format_sync_grp,
-})
+  })
 end)
 
 lsp.ensure_installed({
@@ -48,7 +48,8 @@ lsp.ensure_installed({
     'eslint',
     'rust_analyzer',
     'pylsp',
-    'jdtls'
+    'jdtls',
+    'gopls',
 })
 
 -- Options for Rust analyzer
@@ -78,7 +79,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ["N"] = cmp.mapping(function(fallback)
+        ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
@@ -87,7 +88,7 @@ cmp.setup({
             fallback()
           end
         end, { "i", "s" }),
-        ['P'] = cmp_action.select_prev_or_fallback(),
+        ['<C-p>'] = cmp_action.select_prev_or_fallback(),
     })
     -- mapping = {
     --    ['<Tab>'] = cmp_action.tab_complete(),

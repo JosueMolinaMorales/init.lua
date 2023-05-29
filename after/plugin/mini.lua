@@ -140,3 +140,5 @@ require('mini.surround').setup({
     -- Whether to disable showing non-error feedback
     silent = false,
 })
+
+require('mini.pairs').setup({})
