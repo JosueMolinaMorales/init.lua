@@ -35,11 +35,11 @@ lsp.on_attach(function(client, bufnr)
   vim.wo.signcolumn = "yes"
   local format_sync_grp = vim.api.nvim_create_augroup("Format", {})
   vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.rs",
-  callback = function()
-    vim.lsp.buf.format({ timeout_ms = 200 })
-  end,
-  group = format_sync_grp,
+    pattern = "*.rs",
+    callback = function()
+      vim.lsp.buf.format({ timeout_ms = 200 })
+    end,
+    group = format_sync_grp,
   })
 end)
 
@@ -51,6 +51,17 @@ lsp.ensure_installed({
     'jdtls',
     'gopls',
 })
+
+lsp.format_on_save({
+  format_opts = {
+    async = false,
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['gopls'] = {'go'}
+  }
+})
+
 
 -- Options for Rust analyzer
 lsp.setup()
